@@ -1,0 +1,27 @@
+﻿@using EFModel
+@model IQueryable<News>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @Html.ActionLink("添加","Add","Index")
+        <table border="1">
+            @foreach (News news in Model)
+            {
+                <tr><td><span>编号：</span>@news.NewsId</td></tr>
+                <tr><td><span>内容：</span>@news.NewsConent</td></tr>
+                <tr><td><span>时间：</span>@news.RegTime</td></tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

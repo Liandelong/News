@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EFtestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsId" />
+    </Key>
+    <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NewsConent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RegTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="NewTypes" Relationship="Self.FK_NewTypes_News" FromRole="News" ToRole="NewTypes" />
+  </EntityType>
+  <EntityType Name="NewTypes">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeConent" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NewsId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="News" Relationship="Self.FK_NewTypes_News" FromRole="NewTypes" ToRole="News" />
+  </EntityType>
+  <Association Name="FK_NewTypes_News">
+    <End Role="News" Type="Self.News" Multiplicity="1" />
+    <End Role="NewTypes" Type="Self.NewTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News">
+        <PropertyRef Name="NewsId" />
+      </Principal>
+      <Dependent Role="NewTypes">
+        <PropertyRef Name="NewsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="News" EntityType="Self.News" />
+    <EntitySet Name="NewTypes" EntityType="Self.NewTypes" />
+    <AssociationSet Name="FK_NewTypes_News" Association="Self.FK_NewTypes_News">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewTypes" EntitySet="NewTypes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

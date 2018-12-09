@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EFtestModelStoreContainer" CdmEntityContainer="MyContext">
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="EFtestModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+          <ScalarProperty Name="NewsConent" ColumnName="NewsConent" />
+          <ScalarProperty Name="RegTime" ColumnName="RegTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewTypes">
+      <EntityTypeMapping TypeName="EFtestModel.NewTypes">
+        <MappingFragment StoreEntitySet="NewTypes">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeConent" ColumnName="TypeConent" />
+          <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

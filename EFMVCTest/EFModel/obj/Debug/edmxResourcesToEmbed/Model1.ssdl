@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EFtestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsId" />
+    </Key>
+    <Property Name="NewsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsConent" Type="nvarchar" MaxLength="50" />
+    <Property Name="RegTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="NewTypes">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeConent" Type="nvarchar" MaxLength="10" />
+    <Property Name="NewsId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_NewTypes_News">
+    <End Role="News" Type="Self.News" Multiplicity="1" />
+    <End Role="NewTypes" Type="Self.NewTypes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="News">
+        <PropertyRef Name="NewsId" />
+      </Principal>
+      <Dependent Role="NewTypes">
+        <PropertyRef Name="NewsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EFtestModelStoreContainer">
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewTypes" EntityType="Self.NewTypes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_NewTypes_News" Association="Self.FK_NewTypes_News">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewTypes" EntitySet="NewTypes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
